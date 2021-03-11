@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+
+  acme:
+    restart: unless-stopped
+    network_mode: host
+    privileged: true
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    image: neilpang/acme.sh
+    container_name: acme
+    command: daemon
+    environment:
+      - CF_Token=tokwn
+      - CF_Account_ID=accountid
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+
+      - ./acme/data:/acme.sh
